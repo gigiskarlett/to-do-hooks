@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 
-function App() {
+const App = () => {
 	const [list, setList] = useState([{ id: "5", value: "Buy groceries" }]);
 	const [item, setItem] = useState("");
 
@@ -11,14 +11,8 @@ function App() {
 			value: item.slice(),
 		};
 
-		let newList = [...list];
-		newList.push(newItem);
-		setList(newList);
+		setList([...list, newItem]);
 		setItem("");
-	};
-
-	const updateItem = (key, value) => {
-		setItem(value);
 	};
 
 	return (
@@ -27,16 +21,16 @@ function App() {
 				type="text"
 				placeholder="Type here..."
 				value={item}
-				onChange={(e) => updateItem("item", e.target.value)}
+				onChange={(e) => setItem(e.target.value)}
 			/>
 			<button onClick={() => addItem()}>Input</button>
 			<ul>
-				{list.map((item, index) => (
+				{list.map((item) => (
 					<li key={item.id}>{item.value}</li>
 				))}
 			</ul>
 		</div>
 	);
-}
+};
 
 export default App;

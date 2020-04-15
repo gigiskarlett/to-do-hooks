@@ -32,7 +32,6 @@ class App1 extends React.Component {
 		let list = this.state.list.map((item, index) => {
 			return <li key={item.id}>{item.value}</li>;
 		});
-		console.log(this.state.list);
 		return (
 			<div className="App">
 				<input
