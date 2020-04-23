@@ -4,6 +4,7 @@ import "./App.css";
 const App = () => {
 	const [list, setList] = useState([{ id: "5", value: "Buy groceries" }]);
 	const [item, setItem] = useState("");
+	const [count, setCount] = useState(0);
 
 	const addItem = () => {
 		const newItem = {
@@ -24,6 +25,7 @@ const App = () => {
 				onChange={(e) => setItem(e.target.value)}
 			/>
 			<button onClick={() => addItem()}>Input</button>
+			<button onClick={() => setCount(count + 1)}>{count}</button>
 			<ul>
 				{list.map((item) => (
 					<li key={item.id}>{item.value}</li>

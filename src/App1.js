@@ -1,4 +1,6 @@
 import React from "react";
+
+import styled from "styled-components";
 import "./App.css";
 
 class App1 extends React.Component {
@@ -10,16 +12,19 @@ class App1 extends React.Component {
 		};
 	}
 
-	addItem() {
-		const newItem = {
-			id: 1 + Math.random(),
-			value: this.state.item.slice(),
-		};
+	addItem(e) {
+		e.preventDefault();
+		if (this.state.item !== "") {
+			const newItem = {
+				id: 1 + Math.random(),
+				value: this.state.item.slice(),
+			};
 
-		let list = [...this.state.list];
-		list.push(newItem);
+			let list = [...this.state.list];
+			list.push(newItem);
 
-		this.setState({ list, newItem });
+			this.setState({ list, newItem, item: "" });
+		}
 	}
 
 	updateItem(key, value) {
@@ -30,21 +35,93 @@ class App1 extends React.Component {
 
 	render() {
 		let list = this.state.list.map((item, index) => {
-			return <li key={item.id}>{item.value}</li>;
+			return (
+				<ListItem key={item.id}>
+					<TaskText>{item.value}</TaskText>
+				</ListItem>
+			);
 		});
 		return (
-			<div className="App">
-				<input
-					type="text"
-					placeholder="Type here..."
-					value={this.state.item}
-					onChange={(e) => this.updateItem("item", e.target.value)}
-				/>
-				<button onClick={() => this.addItem()}>Input</button>
-				<ul>{list}</ul>
-			</div>
+			<ToDoContainer>
+				<ToDoList>
+					<TodoHeader>
+						<form onSubmit={(e) => this.addItem(e)}>
+							<Input
+								type="text"
+								placeholder="Type here..."
+								value={this.state.item}
+								onChange={(e) => this.updateItem("item", e.target.value)}
+							/>
+							<Button>Input</Button>
+						</form>
+					</TodoHeader>
+					<ListCont>{list}</ListCont>
+				</ToDoList>
+			</ToDoContainer>
 		);
 	}
 }
 
+const Input = styled.input`
+	margin-top: 10px;
+	border-width: 0;
+	border-radius: 3px;
+	width: 80%;
+	font-size: 12px;
+	height: 24px;
+	padding: 4px;
+	border: 1px solid gainsboro;
+	color: #5f6769;
+`;
+
+const Button = styled.button`
+	border-width: 0;
+	border-radius: 3px;
+	margin-left: 4px;
+	height: 34px;
+	padding: 4px;
+	border: 1px solid gainsboro;
+`;
+
+const ListCont = styled.div`
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+`;
+
+const ListItem = styled.li`
+	list-style: none;
+	padding: 20px;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid gainsboro;
+	display: flex;
+`;
+
+const TaskText = styled.p`
+	font-size: 12px;
+	margin: 0;
+	max-width: 360px;
+	padding-left: 10px;
+`;
+
+const ToDoList = styled.div`
+	text-align: center;
+	background-color: white;
+	width: 500px;
+	border-radius: 4px;
+	overflow: hidden;
+`;
+
+const ToDoContainer = styled.div`
+	justify-content: center;
+	padding: 20px;
+	display: flex;
+`;
+
+const TodoHeader = styled.div`
+	padding: 20px 0;
+	background-color: #00bcd4;
+	overflow: hidden;
+`;
 export default App1;
