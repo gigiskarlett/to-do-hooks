@@ -44,7 +44,7 @@ class App extends React.Component {
       );
     });
     return (
-      <ToDoContainer className="bg-black">
+      <ToDoContainer>
         <ToDoList>
           <TodoHeader>
             <form onSubmit={(e) => this.addItem(e)}>
@@ -107,18 +107,23 @@ const TaskText = styled.p`
   padding-left: 10px;
 `;
 
-const ToDoList = styled.div`
+const ToDoList = styled.div.attrs({
+  className: "border border-gray-500 w-3/4 sm:w-1/2 lg:w-1/3 sm:bg-blue-500",
+})`
   text-align: center;
   background-color: white;
-  width: 500px;
+  border: 1px solid red;
   border-radius: 4px;
   overflow: hidden;
 `;
 
-const ToDoContainer = styled.div.attrs()`
+const ToDoContainer = styled.div.attrs({
+  className: "bg-gray-200 h-full",
+})`
   justify-content: center;
   padding: 20px;
   display: flex;
+  align-items: flex-start;
 `;
 
 const TodoHeader = styled.div`
