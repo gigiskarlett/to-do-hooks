@@ -1578,6 +1578,10 @@ video {
   background-color: #000;
 }
 
+.bg-babyblue {
+  background-color: #00bcd4;
+}
+
 .bg-white {
   background-color: #fff;
 }
@@ -11894,13 +11898,6 @@ video {
 
 .delay-1000 {
   transition-delay: 1000ms;
-}
-
-@import "custom.css";
-
-html {
-  height: 100%;
-  background-color: red;
 }
 
 @media (min-width: 640px) {
