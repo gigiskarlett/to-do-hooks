@@ -1,23 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useCompanies } from "../utils/hooks";
 
 const Company = () => {
-	const [companies, setCompanies] = useState([]);
 	const [type, setType] = useState("iexvolume");
-
-	useEffect(() => {
-		const fetchCompanies = () => {
-			fetch(
-				`https://cloud.iexapis.com/stable/stock/market/list/${type}?token=pk_f8f6821d144c492a8d6d0b56e4ad160f`
-			)
-				.then((res) => res.json())
-				.then((res) => {
-					console.log("fetched", type);
-					setCompanies(res);
-				});
-		};
-		const interval = setInterval(fetchCompanies, 3000);
-		return () => clearInterval(interval);
-	}, [type]);
+	const [companies] = useCompanies(type);
 
 	const trackType = (valueSelected) => {
 		setType(valueSelected);
